@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour
 
     private void ApplyMovement(Vector2 direction)
     {
-        direction = direction * 5;
+        direction = direction * 10;
 
         rigidbody.velocity = direction;
     }
