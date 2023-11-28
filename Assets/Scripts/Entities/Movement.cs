@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -8,11 +9,15 @@ public class Movement : MonoBehaviour
 
     private Vector2 movementDirection = Vector2.zero;
     private Rigidbody2D rigidbody;
+    
+    [SerializeField] private Animator animator;
+    //[SerializeField] private List<Animator> animators;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         rigidbody = GetComponent<Rigidbody2D>();
+        animator = transform.Find("MainSprite").GetComponent<Animator>();
     }
 
     private void Start()
@@ -36,8 +41,10 @@ public class Movement : MonoBehaviour
     private void ApplyMovement(Vector2 direction)
     {
         direction = direction * 10;
-
         rigidbody.velocity = direction;
+        //animators[(int)GameManager.instance.CurCharacter].SetFloat("Speed", direction.normalized.magnitude);
+        animator.SetFloat("Speed", direction.normalized.magnitude);
+        
     }
 
 
